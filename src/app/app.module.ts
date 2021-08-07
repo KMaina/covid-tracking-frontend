@@ -26,6 +26,10 @@ import { DocDashComponent } from './component/doc-dash/doc-dash.component';
 
 
 
+import { GoogleMapsModule } from '@angular/google-maps';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +58,8 @@ import { DocDashComponent } from './component/doc-dash/doc-dash.component';
     HttpClientModule,
     
     
+    GoogleMapsModule,
+   
   ],
   // providers: [],
   providers: [authInterceptorProviders],
