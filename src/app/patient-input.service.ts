@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const AUTH_API = "https://djangoangulartest.herokuapp.com/patientinpunt/";
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -14,10 +15,10 @@ export class PatientInputService {
 
   constructor(private http: HttpClient) { }
 
-  addPatient(name: string, user:number, location: string, symptoms: string): Observable<any> {
+  addPatient(user:string,name:string,location: string, symptoms: string): Observable<any> {
     return this.http.post(AUTH_API , {
-      name,
       user,
+      name,
       symptoms,
       location,
     }, httpOptions);

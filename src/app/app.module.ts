@@ -35,6 +35,9 @@ import { AgmCoreModule } from '@agm/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { MapComponent } from './component/map/map.component';
+import { ContactsComponent } from './component/contacts/contacts.component';
+
+
 
 
 @NgModule({
@@ -57,6 +60,7 @@ import { MapComponent } from './component/map/map.component';
     TracingComponent,
     DocDashComponent,
     PatientDashComponent,
+    ContactsComponent,
 
   ],
   imports: [

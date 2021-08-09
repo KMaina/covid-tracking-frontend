@@ -12,34 +12,27 @@ import { ResultsRequestService } from '../results-service/results.service';
   styleUrls: ['./patient-input-form.component.css']
 })
 export class PatientInputFormComponent implements OnInit {
-
-
   newInput: any = {
-    name: null,
     user: null,
+    name: null,
     symptoms: null,
     location: null,
   };
   user_id: any;
-  errorMessage: any;
   
-  constructor(private patientService:PatientInputService) { }
-  ngOnInit(): void {
-  }
- 
+  constructor(private resultsService:PatientInputService) { }
 
-  submitInput(): void {
+  ngOnInit(): void {
     this.user_id = localStorage.getItem('user_id')
-    let { user, name, symptoms, location} = this.newInput;
-    console.log(this.user_id)
-    this.patientService.addPatient(user = this.user_id, name, symptoms, location).subscribe(
+  }
+  submitInput(): void {
+    this.user_id = localStorage.getItem('user')    
+    let {user, name, location,symptoms} = this.newInput;
+    console.log(this.newInput)
+    this.resultsService.addPatient(user, name,location,symptoms ).subscribe(
       data => {
         console.log(data);
-
       },
-      err => {
-        this.errorMessage = err.error.message;
-      }
     );
   }
 }

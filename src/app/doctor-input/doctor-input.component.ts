@@ -10,16 +10,12 @@ import { from } from 'rxjs';
 })
 export class DoctorInputComponent implements OnInit {
   ItemsArray!: any[];
+  isComplete: any;
+  status: any[];
+  
+
   // ItemsArray= [];
-
-  addNewStatus(ItemsArray){
-    let inputLength = this.ItemsArray.length;
-    ItemsArray.id = inputLength+1;
-    this.ItemsArray.push(ItemsArray)
-  }
-
   constructor(private doctorInputService: DoctorInputService) { }
-
   ngOnInit() {
     this.doctorInputService.getData().subscribe((res: any[])=>{
       this.ItemsArray= res;
@@ -27,6 +23,20 @@ export class DoctorInputComponent implements OnInit {
     })  
   }
 
+
+  addNewStatus(ItemsArray){
+    let inputLength = this.ItemsArray.length;
+    ItemsArray.id = inputLength+1;
+    this.ItemsArray.push(ItemsArray);
+  }
+
+  deleteStatus(){
+    this.doctorInputService.deleteStatus(this.status.id ).subscribe(
+      ()=> console.log('succeess'),
+      (err)=> console.log(err)
+    );
+  }
 }
+
 
 
