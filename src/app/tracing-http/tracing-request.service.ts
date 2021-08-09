@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -28,7 +27,7 @@ export class TracingRequestService  {
       'Content-Type': 'application/json'
     })
   }
-  
+  contact_id:any[];
   constructor(private httpClient: HttpClient) { }
 
  
@@ -45,5 +44,16 @@ export class TracingRequestService  {
         date,
       },httpOptions);
   }
+  updateTracing(user:string,name:string,contact:number,date:Date): Observable<any>{
+    const body = {user,name,contact,date};
+    
+    
+     console.log(this.updateTracing)
+    return this.httpClient.put(this.api + 1 + '/' ,body)
+    
+  }
 
+  deleteTracing(id:number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.api}${id}`);
+  }
 }

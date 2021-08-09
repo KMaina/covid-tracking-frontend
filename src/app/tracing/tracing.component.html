@@ -23,7 +23,7 @@
 		});
 	});
 	$(document).ready(function(){
-    $("#add").click(function(){
+    $("#hide").click(function(){
     $("#addTracingMod").hide();
        });
     });
@@ -75,12 +75,12 @@
             <td>{{ item.date}}</td>
 
             <td>
-              <a href="#editTracingModal" class="edit" data-toggle="modal"><i class="material-icons"
-                  data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-              <!-- <a href="#deleteTracingModal" class="delete" data-toggle="modal"><i class="material-icons"
-                  data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
+              <a href="#editTracingModal" class="edit" data-toggle="modal" ><button (click)="updateTracing()"><i class="material-icons"
+                data-toggle="tooltip" title="Edit">&#xE254;</i></button></a>
+              <a href="#deleteTracingModal" class="delete" data-toggle="modal"><button (click)="deleteTracing()"><i class="material-icons"
+                data-toggle="tooltip" title="Delete">&#xE872;</i></button></a>
             </td>
-          </tr>
+          </tr>>
 
         </tbody>
       </table>
