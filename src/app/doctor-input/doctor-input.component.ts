@@ -19,7 +19,7 @@ export class DoctorInputComponent implements OnInit {
   ngOnInit() {
     this.doctorInputService.getData().subscribe((res: any[])=>{
       this.ItemsArray= res;
-      console.log (this.ItemsArray)
+      // console.log (this.ItemsArray)
     })  
   }
 
@@ -31,7 +31,7 @@ export class DoctorInputComponent implements OnInit {
     console.log (this.ItemsArray)
   }
 
-  deleteRow(id){
+  deleteStatus(id){
         for(let i = 0; i < this.ItemsArray.length; ++i){
             if (this.ItemsArray[i].id === id) {
                 this.ItemsArray.splice(i,1);

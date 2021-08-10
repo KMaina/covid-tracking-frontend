@@ -2,7 +2,7 @@
 
 <html lang="en" dir="ltr">
 
-<body style="padding-top: 3%;">
+<body style="padding-top: 5%;">
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
@@ -64,7 +64,10 @@
           <div class="right-side">
             <div class="box-topic">Profile</div>
             <div class="number">{{username}}</div>
+<<<<<<< HEAD
             <div class="number">{{user_id}}</div>
+=======
+>>>>>>> a8d5ee8e7cce5e178aee1f55f387ae9a1e3ee34d
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Spain</span>
@@ -74,7 +77,9 @@
         <div class="box">
           <div class="right-side">
             <div class="box-topic">My Status</div>
-            <div class="number">6,876</div>
+            <div class="number" *ngFor="let patient of patientsStatus">
+              {{patient.status}}
+            </div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Up from yesterday</span>

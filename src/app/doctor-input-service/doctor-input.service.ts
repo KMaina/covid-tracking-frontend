@@ -21,6 +21,12 @@ export class DoctorInputService {
   //   return this.http.delete<void>(`${this.api}${id}`);
   // }
 
+
+
+getData(): Observable<any[]> {
+  return this.http.get<any[]>(this.api);
+}
+
   patient(name: string, status: string, recomendations: string, remarks: string): Observable<any> {
     return this.http.post(AUTH_API , {
       name,
