@@ -11,7 +11,7 @@ import { from } from 'rxjs';
 export class DoctorInputComponent implements OnInit {
   ItemsArray!: any[];
   isComplete: any;
-  status: any[];
+  status: any;
   
 
   // ItemsArray= [];
@@ -28,14 +28,16 @@ export class DoctorInputComponent implements OnInit {
     let inputLength = this.ItemsArray.length;
     ItemsArray.id = inputLength+1;
     this.ItemsArray.push(ItemsArray);
+    console.log (this.ItemsArray)
   }
 
-  deleteStatus(){
-    this.doctorInputService.deleteStatus(this.status.id ).subscribe(
-      ()=> console.log('succeess'),
-      (err)=> console.log(err)
-    );
-  }
+  deleteRow(id){
+        for(let i = 0; i < this.ItemsArray.length; ++i){
+            if (this.ItemsArray[i].id === id) {
+                this.ItemsArray.splice(i,1);
+            }
+        }
+    }
 }
 
 
