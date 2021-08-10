@@ -56,4 +56,5 @@ export class TracingRequestService  {
   deleteTracing(id:number): Observable<void> {
     return this.httpClient.delete<void>(`${this.api}${id}`);
   }
+
 }
