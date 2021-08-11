@@ -24,6 +24,7 @@
           </option>
         </select>
       </div>
+
       <div class="form-group">
         <label for="recomendations">recomendations</label>
         <select [(ngModel)]="newInput.recomendations" [ngModelOptions]="{standalone: true}" id="recomendations"
@@ -45,7 +46,7 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-success">submit</button>
+        <button ng-click='submitInput()' class="btn btn-success">submit</button>
       </div>
     </div>
   </form>

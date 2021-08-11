@@ -13,6 +13,7 @@ const httpOptions = {
 export class DoctorInputService {
  private api = "https://djangoangulartest.herokuapp.com/doctorsinpunt/";
 
+ 
   constructor(private http: HttpClient) { }
 
   

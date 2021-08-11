@@ -42,6 +42,10 @@ import { PatientsComponent } from './component/patients/patients.component';
 
 
 
+// import { GoogleMapsModule } from '@angular/google-maps';
+
+
+
 @NgModule({
   declarations:[
     AppComponent,
