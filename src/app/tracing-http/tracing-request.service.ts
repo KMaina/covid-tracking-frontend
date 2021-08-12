@@ -30,8 +30,6 @@ export class TracingRequestService  {
   contact_id:any[];
   constructor(private httpClient: HttpClient) { }
 
- 
-
   getData(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.api);
   }

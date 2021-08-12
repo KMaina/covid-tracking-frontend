@@ -14,6 +14,8 @@ export class TracingComponent implements OnInit {
         contact:null,
         date : null
     };
+    userContacts:any;
+    user_id: number;
     username: string;
     selectedTracing;
     isSuccessful = false;
@@ -24,6 +26,7 @@ export class TracingComponent implements OnInit {
     @Output()  addTracing =new EventEmitter<Tracing>();
   contactapi: any;
   tracing:any =[]
+  user: string;
   constructor(private tracingService: TracingRequestService) {
     this.selectedTracing = {id:-1,name:'',number:0,date:new Date(),};
   }
@@ -34,13 +37,15 @@ export class TracingComponent implements OnInit {
     })
   }
   submitTrace(): void {
-    const {user, name, contact,date} = this.newTracing;
-    this.tracingService.addData(user, name, contact, date).subscribe(
+    this.user = localStorage.getItem('user_id')
+    let { user, name, contact, date } = this.newTracing;
+    this.tracingService.addData(user = this.user, name, contact, date).subscribe(
       data => {
         console.log(data);
       },
       err => {
-       console.log("error");
+        this.errorMessage = err.error.message;
+
       }
     );
   }
