@@ -57,7 +57,10 @@ export class PatientInputFormComponent implements OnInit {
         console.log(data);
       },
     );
-
-
+    window.location.reload();
   }
+  // reloadCurrentPage() {
+  //   window.location.reload();
+  //  }
+
 }
