@@ -49,6 +49,7 @@ storedcoord: any;
     this.patientInput = {user, name, location, symptoms}
     console.log(this.patientInput)
     
+    window.location.reload
     this.resultsService.addPatient(user, name,location,symptoms ).subscribe(
       data => {
         console.log(data);
