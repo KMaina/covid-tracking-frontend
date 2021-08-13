@@ -23,7 +23,7 @@ export class TracingComponent implements OnInit {
   user_id: any;
   username: string;
   counter: number;
-
+  
   // newTracing = new Tracing("", "", 0, new Date());
   @Output() addTracing = new EventEmitter<Tracing>();
 

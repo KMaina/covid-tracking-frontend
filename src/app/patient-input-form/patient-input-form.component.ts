@@ -13,8 +13,9 @@ import { ResultsRequestService } from '../results-service/results.service';
 })
 export class PatientInputFormComponent implements OnInit {
 
-storedlocation: any;
-storedcoord: any;
+  storedlocation: any;
+  storedcoord: any;
+  storedcity: any;
   newInput: any = {
     // user: null,
     name: null,
@@ -28,34 +29,39 @@ storedcoord: any;
     location: null,
   };
   user_id: any;
-  
-  constructor(private resultsService:PatientInputService) { }
+
+  constructor(private resultsService: PatientInputService) { }
 
   ngOnInit(): void {
+    this.user_id = localStorage.getItem('user_id')
+    console.log(this.user_id)
     this.storedlocation = localStorage.getItem("address");
     console.log(this.storedlocation)
     this.storedcoord = localStorage.getItem("coordinates");
   }
-  
+
   submitInput(): void {
     this.storedlocation = localStorage.getItem("address");
     this.storedcoord = localStorage.getItem("coordinates");
+    this.storedcity = localStorage.getItem("locality")
     console.log(this.storedlocation)
-    this.user_id = localStorage.getItem('user_id') 
-    let location= this.storedlocation 
-    let user = this.user_id  
-    console.log (user)
-    let {name,symptoms} = this.newInput;
-    this.patientInput = {user, name, location, symptoms}
+    this.user_id = localStorage.getItem('user_id')
+    let location = this.storedlocation +','+ this.storedcity
+    let user = this.user_id
+    console.log(user)
+    let { name, symptoms } = this.newInput;
+    this.patientInput = { user, name, location, symptoms }
     console.log(this.patientInput)
-    
-    window.location.reload
-    this.resultsService.addPatient(user, name,location,symptoms ).subscribe(
+
+    this.resultsService.addPatient(user, name, location, symptoms).subscribe(
       data => {
         console.log(data);
       },
     );
-
-  
+    window.location.reload();
   }
+  // reloadCurrentPage() {
+  //   window.location.reload();
+  //  }
+
 }

@@ -1,7 +1,7 @@
-<div class="container-fluid">
-  <h2 class="text-center">Kindly provide feedback here</h2>
-  <hr style="margin-left: 30%;">
-  <form (ngSubmit)='submitInput()' #inputForm='ngForm' style="margin-left: 30%;">
+<div class="container-fluid" style="font-family: 'Yeon Sung', cursive; margin-top:3%; padding-top:10%">
+  <h2 class="text-center"  style="font-family: 'Yeon Sung', cursive;">Doctors' feedback form</h2>
+  <hr style="margin-left: 10%;">
+  <form (ngSubmit)='submitInput()' #inputForm='ngForm' style="margin-left: 9%;">
     <div class="form-group">
       <label for="name">Name</label>
       <div class="form-group">
@@ -26,7 +26,7 @@
       </div>
 
       <div class="form-group">
-        <label for="recomendations">recomendations</label>
+        <label for="recomendations">Recomendations</label>
         <select [(ngModel)]="newInput.recomendations" [ngModelOptions]="{standalone: true}" id="recomendations"
           name="recomendations" required class="form-control">
           <option [value]="'hospital care'">
@@ -38,7 +38,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="remarks">remarks</label>
+        <label for="remarks">Remarks</label>
         <textarea class="form-control" id="remarks" [(ngModel)]="newInput.remarks" name="remarks" rows="4"
           #remarks='ngModel' required></textarea>
         <div [hidden]="remarks.valid || remarks.pristine" class="alert alert-danger">

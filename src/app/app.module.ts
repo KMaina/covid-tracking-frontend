@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {LocationServiceService} from './component/location-service.service'
+// import {LocationServiceService} from './component/location-service.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TracingComponent } from './tracing/tracing.component';
@@ -23,27 +23,18 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { DocDashComponent } from './component/doc-dash/doc-dash.component';
 import { DoctorsComponent } from './component/doctors/doctors.component';
 import { PatientDashComponent } from './component/patient-dash/patient-dash.component';
-
-
-
-
-// import { GoogleMapsModule } from '@angular/google-maps';
-
-import { CommonModule } from '@angular/common';
-// current location
-import { AgmCoreModule } from '@agm/core';
-
-import { MatCardModule } from '@angular/material/card';
-import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
-import { MapComponent } from './component/map/map.component';
 import { ContactsComponent } from './component/contacts/contacts.component';
 import { PatientsComponent } from './component/patients/patients.component';
-
-
-
-
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 // import { GoogleMapsModule } from '@angular/google-maps';
-
+import { CommonModule } from '@angular/common';
+// current location
+// import { AgmCoreModule } from '@agm/core';
+import { MatCardModule } from '@angular/material/card';
+// import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { MapComponent } from './component/map/map.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SearchFormComponent } from './component/search-form/search-form.component';
 
 
 @NgModule({
@@ -69,6 +60,7 @@ import { PatientsComponent } from './component/patients/patients.component';
     PatientDashComponent,
     ContactsComponent,
     PatientsComponent,
+    SearchFormComponent,
 
   ],
   imports: [
@@ -76,30 +68,26 @@ import { PatientsComponent } from './component/patients/patients.component';
     AppRoutingModule,
     // GoogleMapsModule,
     MatCardModule,
-    MatGoogleMapsAutocompleteModule,
+    // MatGoogleMapsAutocompleteModule,
     HttpClientModule,
-
     CommonModule,
-
     BrowserAnimationsModule,
     AngularMaterialModule,
-    // FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(), // ToastrModule added
 
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBWTLpNCpgZ8M5TAv0ViEDT8LpbODG1bXI',
-      // apiKey: 'AIzaSyCR3F6p0cBZEcfs1U2S4u5b0T76o4eDRwU',
-      // libraries: ["places"],
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyBWTLpNCpgZ8M5TAv0ViEDT8LpbODG1bXI',
+    //   // apiKey: 'AIzaSyCR3F6p0cBZEcfs1U2S4u5b0T76o4eDRwU',
+    //   // libraries: ["places"],
    
-    }),
+    // }),
 
     BrowserAnimationsModule
-   
   ],
-  providers: [LocationServiceService,
-    authInterceptorProviders],
+  providers: [authInterceptorProviders,NgbModalConfig, NgbModal],
   bootstrap: [AppComponent],
     
 
