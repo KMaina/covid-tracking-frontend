@@ -35,6 +35,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MapComponent } from './component/map/map.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SearchFormComponent } from './component/search-form/search-form.component';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { SearchFormComponent } from './component/search-form/search-form.compone
     ContactsComponent,
     PatientsComponent,
     SearchFormComponent,
+    FilterPipe,
 
   ],
   imports: [
