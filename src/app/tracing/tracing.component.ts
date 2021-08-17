@@ -8,32 +8,33 @@ import { TracingRequestService } from '../tracing-http/tracing-request.service';
   providers: [TracingRequestService]
 })
 export class TracingComponent implements OnInit {
-    form:any = {
-        user: null,
-        name : null,
-        contact:null,
-        date : null
-    };
-    userContacts:any;
-    user_id: number;
-    username: string;
-    selectedTracing;
-    isSuccessful = false;
-    isSignUpFailed = false;
-    errorMessage = '';
-    ItemsArray!: any[];
-    newTracing= new Tracing ("","",0,new Date());
-    @Output()  addTracing =new EventEmitter<Tracing>();
-  contactapi: any;
-  tracing:any =[]
-  user: string;
-  constructor(private tracingService: TracingRequestService) {
-    this.selectedTracing = {id:-1,name:'',number:0,date:new Date(),};
-  }
+  newTracing: any = {
+    user: null,
+    name: null,
+    contact: 0,
+    date: new Date(),
+  };
+
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+  ItemsArray!: any[];
+  userContacts!: any[];
+  user_id: any;
+  username: string;
+  counter: number;
+
+  @Output() addTracing = new EventEmitter<Tracing>();
+  user: any;
+
+  constructor(private tracingService: TracingRequestService) { }
   ngOnInit(): void {
     this.username = localStorage.getItem('username')
-    this.tracingService.getData().subscribe((res: any[])=>{
-      this.ItemsArray= res;
+    this.user_id = localStorage.getItem('user_id')
+    this.tracingService.getData().subscribe((res: any[]) => {
+      this.ItemsArray = res;
+      this.userContacts = this.ItemsArray.filter(id => id.user == this.user_id);
+      this.counter = this.userContacts.length
     })
   }
   submitTrace(): void {
@@ -45,26 +46,21 @@ export class TracingComponent implements OnInit {
       },
       err => {
         this.errorMessage = err.error.message;
-
       }
     );
+    window.location.reload();
   }
-  updateTracing (): void{
-  const {user, name, contact,date} = this.newTracing;
-  this.tracingService.updateTracing(user, name, contact, date).subscribe(
-    data => {
-      this.selectedTracing.push(data);
-      console.log(data);
-    },
-    error => {
-      console.log(error);
-    }
-  );
-}
-deleteTracing(){
-  this.tracingService.deleteTracing(this.tracing.id).subscribe(
-    ()=> console.log('succeess'),
-    (err)=> console.log(err)
-  );
-}
+  deleteP(id) {
+    this.tracingService.deletePatient(id).subscribe(
+      (msg) => console.log(msg),
+      (error) => console.log(error)
+    );
+    window.location.reload();
+  }
+  updatePatient(id) {
+    this.tracingService.updatePatient(this.newTracing, id).subscribe( 
+      (msg) => console.log(msg),
+      (error) => console.log(error)
+    );
+  };
 }
