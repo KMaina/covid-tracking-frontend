@@ -23,8 +23,7 @@ export class TracingComponent implements OnInit {
   user_id: any;
   username: string;
   counter: number;
-  
-  // newTracing = new Tracing("", "", 0, new Date());
+
   @Output() addTracing = new EventEmitter<Tracing>();
 
   constructor(private tracingService: TracingRequestService) { }
@@ -35,8 +34,6 @@ export class TracingComponent implements OnInit {
       this.ItemsArray = res;
       this.userContacts = this.ItemsArray.filter(id => id.user == this.user_id);
       this.counter = this.userContacts.length
-      // console.log(this.counter);
-
     })
   }
   submitTrace(): void {
@@ -48,9 +45,21 @@ export class TracingComponent implements OnInit {
       },
       err => {
         this.errorMessage = err.error.message;
-
       }
     );
+    window.location.reload();
   }
-
+  deleteP(id) {
+    this.tracingService.deletePatient(id).subscribe(
+      (msg) => console.log(msg),
+      (error) => console.log(error)
+    );
+    window.location.reload();
+  }
+  updatePatient(id) {
+    this.tracingService.updatePatient(this.newTracing, id).subscribe( 
+      (msg) => console.log(msg),
+      (error) => console.log(error)
+    );
+  };
 }

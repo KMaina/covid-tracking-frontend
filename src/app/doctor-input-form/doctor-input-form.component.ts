@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DoctorInput } from '../doctor-input-class/doctor-input';
-import { DoctorInputService } from '../doctor-input-service/doctor-input.service';
+import { ResultsRequestService } from '../results-service/results.service';
 import { AuthService } from '../services/auth.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { DoctorInputService } from '../doctor-input-service/doctor-input.service';
 @Component({
   selector: 'app-doctor-input-form',
   templateUrl: './doctor-input-form.component.html',
@@ -18,17 +20,15 @@ export class DoctorInputFormComponent implements OnInit {
   };
   patientsNames!: any[];
   patients: any[];
+  PatId: any;
 
-
-  constructor(private doctorInputService: DoctorInputService, private authService: AuthService) { }
-  ngOnInit(): void {
-    this.authService.getUsers().subscribe((res: any[]) => {
-      this.patientsNames = res;
-      this.patients = this.patientsNames.filter(patient => patient.role === 'is_patient')
-      console.log(this.patients)
-
-    })
+  showSuccess() {
+    this.toastr.success('Recomendations successfully submitted and updated to the patients dashboard');
   }
+
+
+  constructor(private doctorInputService: DoctorInputService, private authService: AuthService, private toastr: ToastrService, private router: Router , private resultRequestService: ResultsRequestService,) { }
+  
   submitInput(): void {
 
     const { name, status, recomendations, remarks } = this.newInput;
@@ -37,6 +37,27 @@ export class DoctorInputFormComponent implements OnInit {
         // console.log(data);
       },
     );
+    this.router.navigate(['results']);
     // window.location.reload();
+  }
+  public async ngOnInit(): Promise<void> {
+    this.resultRequestService.onDoctorSelect.subscribe(value => {
+      console.log('FROM Display Comp -----', value);
+      this.PatId = value;
+      if (this.PatId) {
+        this.resultRequestService.getPatientsById(this.PatId).then(response => {
+          // console.log(response) 
+        })
+      }
+    })
+    this.authService.getPatients().subscribe((res: any[]) => {
+      this.patientsNames = res;
+      // this.patients = res
+      console.log(this.PatId + 'dfghjkl')
+      console.log(this.patientsNames)
+      this.patients = this.patientsNames.filter(patient => patient.id === this.PatId)
+      console.log(this.patients)
+
+    })
   }
 }
